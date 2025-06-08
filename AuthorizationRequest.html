@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="ar">
+    <h1>Authorization Request</h1>
+    <form method="get" action="https://www.donationalerts.com/oauth/authorize">
+        <label>
+            client_id<br/>
+            <input name="client_id"/>
+        </label><br/>
+        <label>
+            redirect_uri<br/>
+            <input name="redirect_uri" value="http://127.0.0.1:8080/"/>
+        </label><br/>
+        <label>
+            response_type<br/>
+            <input name="response_type" value="code"/>
+        </label><br/>
+        <label>
+            scope<br/>
+            <input name="scope" value="oauth-user-show"/>
+        </label><br/>
+        <button type="submit">Заслать</button>
+    </form>
+</div>
+<div id="gt" style="display: none">
+    <h1>Getting Access Token</h1>
+    <form method="post" action="https://www.donationalerts.com/oauth/token">
+        <label>
+            client_id<br/>
+            <input name="client_id"/>
+        </label><br/>
+        <label>
+            client_secret<br/>
+            <input name="client_secret" type="password"/>
+        </label><br/>
+        <label>
+            redirect_uri<br/>
+            <input name="redirect_uri" value="http://127.0.0.1:8080/"/>
+        </label><br/>
+        <label>
+            grant_type<br/>
+            <input name="grant_type" value="authorization_code"/>
+        </label><br/>
+        <label>
+            code<br/>
+            <textarea name="code" id="code" cols="60" rows="6">
+            </textarea>
+        </label><br/>
+        <button type="submit">Заслать</button>
+    </form>
+</div>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('code')) {
+        document.getElementById('ar').style.display = 'none';
+        document.getElementById('gt').style.display = 'block';
+        document.getElementById('code').value = urlParams.get('code');
+    }
+</script>
+</body>
+</html>
