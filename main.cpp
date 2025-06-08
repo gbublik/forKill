@@ -16,10 +16,9 @@ std::string readFile(const char* path) {
 }
 
 int main() {
-    // HTTPS
     httplib::Server svr;
 
-    svr.Get("/", [](const httplib::Request &, httplib::Response &res) {
+    svr.Get("/", [](const httplib::Request &req, httplib::Response &res) {
       res.set_content(readFile("../AuthorizationRequest.html"), "text/html; charset=UTF-8");
     });
 
